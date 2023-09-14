@@ -1,0 +1,58 @@
+﻿<Window x:Class="寝室管理系统.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:寝室管理系统"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        Title="寝室管理系统" Height="180" Width="320">
+    <Grid>
+        <!--与主窗体有间距是为了阴影显示-->
+        <Border Background="{DynamicResource SB_Black}" CornerRadius="6" Margin="12">
+            <!--设置阴影-->
+            <Border.Effect>
+                <DropShadowEffect Color="{StaticResource C_Black}" ShadowDepth="0" BlurRadius="16" Opacity="0.6"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!--一行高度固定为40，另一行为剩下高度-->
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--标题栏-->
+                <Grid Grid.Row="0" MouseLeftButtonDown="Title_MouseDown">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--标题-->
+                    <TextBlock Grid.Column="0" Text="寝室管理系统-433" Height="28" Width="240"
+                           TextAlignment="Center" Style="{DynamicResource Text_Big}"/>
+                    <Button Grid.Column="1" Content="X" Style="{StaticResource Button_Temp_Default}" 
+                            Width="28" Height="28" Margin="4 4 8 4" Click="But_CloseApp_Click"/>
+                </Grid>
+                <Grid Grid.Row="1" Margin="16 0 16 16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="Text_Time" Grid.Row="0" Style="{StaticResource Text_Big}" VerticalAlignment="Center" TextAlignment="Center"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="今日打扫卫生：" Style="{StaticResource Text_Medium}" VerticalAlignment="Center" TextAlignment="Center"/>
+                        <TextBlock x:Name="Text_Name" Grid.Column="1" Style="{StaticResource Text_Big}" VerticalAlignment="Center" TextAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

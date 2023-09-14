@@ -1,0 +1,98 @@
+﻿<Application x:Class="寝室管理系统.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:寝室管理系统"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--#region 颜色标准表-->
+        <Color x:Key="C_White">#DDDDDD</Color>
+        <Color x:Key="C_Gray">#777777</Color>
+        <Color x:Key="C_DeepBlack">#111111</Color>
+        <Color x:Key="C_Black">#333333</Color>
+        <Color x:Key="C_LightBlack">#444444</Color>
+        <Color x:Key="C_LightRed">#FF6666</Color>
+        <Color x:Key="C_LightBlue">#6699CC</Color>
+        <!--#endregion-->
+
+        <!--#region 固体刷子颜色表-->
+        <SolidColorBrush x:Key="SB_White" Color="{StaticResource C_White}"/>
+        <SolidColorBrush x:Key="SB_Gray" Color="{StaticResource C_Gray}"/>
+        <SolidColorBrush x:Key="SB_DeepBlack" Color="{StaticResource C_DeepBlack}"/>
+        <SolidColorBrush x:Key="SB_Black" Color="{StaticResource C_Black}"/>
+        <SolidColorBrush x:Key="SB_LightBlack" Color="{StaticResource C_LightBlack}"/>
+        <SolidColorBrush x:Key="SB_LightRed" Color="{StaticResource C_LightRed}"/>
+        <SolidColorBrush x:Key="SB_LightBlue" Color="{StaticResource C_LightBlue}"/>
+        <!--#endregion-->
+
+        <!--标准大字体-->
+        <Style x:Key="Text_Big" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource SB_White}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="新宋体"/>
+        </Style>
+        <!--标准中字体-->
+        <Style x:Key="Text_Medium" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource SB_White}"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <!--标准小字体-->
+        <Style x:Key="Text_Small" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource SB_White}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <!--#region 动画执行属性-->
+        <!-- 缓 动 函 数 只 能 静 态 使 用!!!! -->
+        <!--用指数缓动函数效果好-->
+        <!--退出使用-->
+        <ExponentialEase x:Key="Pe_Out" Exponent="10" EasingMode="EaseOut"/>
+        <!--进入使用-->
+        <ExponentialEase x:Key="Pe_In" Exponent="4" EasingMode="EaseOut"/>
+        <!--#endregion-->
+
+        <!--标准按钮样式-->
+        <Style x:Key="Button_Temp_Default" TargetType="Button">
+            <!--设置模板-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" CornerRadius="4" Background="{DynamicResource SB_LightBlack}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                            <!--阴影效果-->
+                            <Border.Effect>
+                                <DropShadowEffect x:Name="Bd_D" Color="{DynamicResource C_Black}" Opacity="0.7" ShadowDepth="0" BlurRadius="10"/>
+                            </Border.Effect>
+                            <!--内容呈现，保证按钮显示功能-->
+                            <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--鼠标进入-->
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <!--不添加持续时间才能使动画有正常的恢复-->
+                                        <!-- 在 动 画 里 只 能 用 静 态 资 源 !!!-->
+                                        <ColorAnimation To="{StaticResource C_Gray}" Storyboard.TargetName="Bd"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            EasingFunction="{StaticResource Pe_In}"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <!--鼠标离开-->
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation To="{StaticResource C_LightBlack}" Storyboard.TargetName="Bd"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            EasingFunction="{StaticResource Pe_Out}"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                                <!--实现鼠标移出结束动画-->
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>
